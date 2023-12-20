@@ -34,11 +34,6 @@ function App() {
         margin: flexSizes[Math.floor(Math.random() * flexSizes.length)] * 2,
       })));
 
-    nums.pop()
-    nums.push(
-
-    )
-
     setNums(nums)
 
   }, []);
@@ -46,24 +41,33 @@ function App() {
   return (
     <>
       <div className='container' key="container">
-        {nums.map(o => <div id={`door-${o.num}`} className='door' key={o.num} style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          flexGrow: 1,
-          ...o
-        }}
+        {nums.map(o =>
+          <div id={`door-${o.num}`} className='door' key={o.num}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexGrow: 1,
+              ...o
+            }}
 
-          onClick={() => {
-            setHidden(false)
-            setActive(o.num)
-            document.querySelector(`#door-${o.num}`).style.opacity = "0"
-          }}
-        >
-          <p>
-            {o.num}
-          </p>
-        </div>)}
+            onClick={e => {
+              let clicked = e.target.textContent;
+              let today = new Date().getDate();
+
+              if (clicked > today) {
+                window.alert("You're too early!! Don't be a sneak 😤😤😤")
+              } else {
+                setHidden(false)
+                setActive(o.num)
+                document.querySelector(`#door-${o.num}`).style.opacity = "0"
+              }
+            }}
+          >
+            <p>
+              {o.num}
+            </p>
+          </div>)}
       </div>
       <>
         <div className='modal'
